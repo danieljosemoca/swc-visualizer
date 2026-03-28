@@ -40,23 +40,22 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
 
     nodes = {}
     root_node = None
-    for row in df.itertuples(index=False):
+    for row in df.itertuples(index=False):  # each line is a node in swc files
         node = Node(
             index=int(row.Index),
-            type=int(row.Type),
+            node_type=int(row.Type),
             x=float(row.X),
             y=float(row.Y),
             z=float(row.Z),
             radius=float(row.R),
             parent=int(row.Parent)
         )
-        nodes[node._index] = node
+        nodes[node._index] = node  # add new node to dictionary 
 
-    # Link parent-child relationships
+    # link parent-child relationships
     for node in nodes.values():
-
         if node._parent == -1:
-            # Root node
+            # root node
             if root_node is None:  # check that we've had no other root node
                 root_node = node 
             else: 
@@ -69,6 +68,7 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
         raise ValueError("swc file must contain only one root")
 
     return root_node, nodes
+
 
 def main():
     df = swc_to_dataframe('morphology/main.swc')

@@ -23,3 +23,7 @@ alzheimers
 parkinsons? 
 #igh branching vs low branching neurons
 diff length 
+
+
+== to do == 
+- root node list instead of one root node per swc? 
