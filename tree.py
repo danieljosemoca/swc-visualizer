@@ -21,16 +21,17 @@ class Node:
         nodes_dict: dictionary of notes outputed by dataframe_to_tree(),
           needed if index of "other" node provided
         """
-        if isinstance(other, int):
-            if nodes_dict is None: 
+        if isinstance(other, int):  # 'other' was inputted as an index --> convert to node
+            if nodes_dict is None:  # we're gonna need a dict[index, Node object]
                 raise ValueError("please input the nodes dictionary when 'other' is an index.")
-            if other not in nodes_dict:
+            if other not in nodes_dict:  # index doesn't exist
                 raise ValueError(f"Node index {other} not found")
-            other = nodes_dict[other]
+            other = nodes_dict[other]  # convert index to node object
 
-        elif not isinstance(other, Node):
+        elif not isinstance(other, Node):   # 'other' was inputted as neither a Node or index for a node
             raise TypeError("'other' must be Node or int")
 
+        # 3D distance formula
         return math.sqrt((other._x - self._x)**2 + (other._y - self._y)**2 + (other._z - self._z)**2)
 
 
@@ -39,17 +40,15 @@ class Node:
         node = self 
         distance_accumulator = 0
         while node._parent != -1: 
-            distance_accumulator += node.distance(nodes[node._parent])
+            distance_accumulator += node.distance(node._parent)
             node = nodes[node._parent]
 
         return distance_accumulator
 
-        
-
-        
 
     def branching_points(self): 
-        pass
+        "computes the total number of branching points from the current node to all children (bruv describe this better)"
+
 
     def dendritic_complexity(self):
         pass
