@@ -45,18 +45,27 @@ class Node:
 
         return distance_accumulator
 
+    def validate(self): 
+        "checks tree integrity and fixes anything it can..."
 
     def branching_points(self): 
-        "computes the total number of branching points from the current node to all children (bruv describe this better)"
-
+        "computes the total number of branching points from the current node to all children nodes (bruv describe this better)"
 
     def dendritic_complexity(self):
+        "whole neuron level"
+        pass
+
+    def branching_complexity(self): 
         pass
 
     def tortuosity(self): 
         pass
 
-    
+    def degeneration_score(self, other_rootnode: "Node"):
+        """compares volume of two swc files."""
+        pass
 
-
+    def neuro_compare(self, other_rootnode: "Node"):
+        """quantify spatial distribution changes between swc files"""
+        # could make a cool graph
 
