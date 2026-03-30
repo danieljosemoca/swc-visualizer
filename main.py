@@ -3,6 +3,7 @@ import pandas as pd
 
 import matplotlib.pyplot as plt
 from tree import Node
+from visualization import plot_tree_2d
 
 
 # == Helper functions ==
@@ -90,9 +91,9 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
 def main():
     df = swc_to_dataframe("morphology/main.swc")
     root_node, nodes = dataframe_to_tree(df)
-    print(root_node.distance(nodes[12]))
-    print(nodes[12].length_to_root())
+    plot_tree_2d(nodes)
 
 
 if __name__ == "__main__":
     main()
+

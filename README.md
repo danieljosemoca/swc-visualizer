@@ -63,3 +63,11 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 - supervised learning disease in general (categorize neurons as healthy or abnormal)
 - unsupervised learning to assist with general data exploration (PCA, k-means)
 
+
+
+
+
+3D visualizer: 
+- pymol 
+- nglview 
+- opengl
