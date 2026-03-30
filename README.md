@@ -71,3 +71,4 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 - pymol 
 - nglview 
 - opengl
+- plot3d try first

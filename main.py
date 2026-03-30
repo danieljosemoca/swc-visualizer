@@ -1,7 +1,5 @@
-import numpy as np
 import pandas as pd
 
-import matplotlib.pyplot as plt
 from tree import Node
 from visualization import plot_tree_2d
 
@@ -41,7 +39,8 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
     """
 
     nodes = {}
-    for row in df.itertuples(index=False):  # each line is a node in swc files
+    for row in df.itertuples(index=False):
+        # each line corresponds to a single node in swc files
         node = Node(
             index=int(row.Index),
             node_type=int(row.Type),
@@ -54,35 +53,34 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
         )
         nodes[node._index] = node  # add new node to dictionary
 
-    # link parent-child relationships
+    # =add parent reference using parent index attribute=
     root_node = None
     for node in nodes.values():
-        if node._parent_index == -1:
-            # root node
+        if node._parent_index == -1:  # root node check
             if root_node is not None:
                 # looks like we've had a root node already
                 raise ValueError("swc file must contain only one root")
-
             root_node = node
             continue  # root node needs no parent node
 
         if node._parent_index not in nodes:
-            raise ValueError(
-                f"Parent index {node._parent_index} not found (error in swc)."
-            )
+            msg = f"Parent index {node._parent_index} not found (error in swc)."
+            raise ValueError(msg)
 
+        # get reference to the parent node object using nodes dictionary
         parent_node = nodes[node._parent_index]
-        node._parent = (
-            parent_node  #  assign a parent node to current node using _parent_index
-        )
-        parent_node._children.append(
-            node
-        )  # append current node as item in parent node's children list
 
-    if root_node is None:  # check we have a root node by the end
-        raise ValueError("No root found. swc file must contain a root.")
+        #  assign the parent node to current node's parent node attribute
+        node._parent = parent_node
 
-    if root_node._parent is not None:  # check root node has no parent by the end
+        # append current node as item in parent node's children list
+        parent_node._children.append(node)
+
+    # final checks
+    if root_node is None:  # check we have a root node
+        msg = "No root found. swc file must contain a root."
+        raise ValueError(msg)
+    if root_node._parent is not None:  # check root node has no parent
         raise ValueError("Root node should not have a parent")
 
     return root_node, nodes
@@ -96,4 +94,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

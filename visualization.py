@@ -17,4 +17,3 @@ def plot_tree_2d(nodes: dict[int, Node]):
     plt.title("Neuron Morphology 2D")
 
     plt.show()
-
