@@ -45,8 +45,21 @@ epilepsy = inhibitory neurons pruned, dentate granule cells excitatory self-rein
 migraine = decreased neurite growth in headeache-processing regions (decreased neuronal plasticity)
 
 
-== to do == 
+
+
+== TO DO == 
+-mandatory-
 - root node list instead of one root node per swc? 
 - make self._parent Node object
 - validation tools 
+- research math.dist((x, y, z), (x, y, z)), instead of math.sqrt(3d distance formula)
+- 2D visualizaton tools
+
+-ideally-
+- basic info tools (with graphs too)
+
+-extra ideas-
+- supervised learning for a specific disease (categorize neurons as healthy or from x condition)
+- supervised learning disease in general (categorize neurons as healthy or abnormal)
+- unsupervised learning to assist with general data exploration (PCA, k-means)
 

@@ -40,7 +40,6 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
     """
 
     nodes = {}
-    root_node = None
     for row in df.itertuples(index=False):  # each line is a node in swc files
         node = Node(
             index=int(row.Index),
@@ -49,24 +48,36 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
             y=float(row.Y),
             z=float(row.Z),
             radius=float(row.R),
-            parent=int(row.Parent),
+            parent_index=int(row.Parent),
+            # parent Node assigned later
         )
         nodes[node._index] = node  # add new node to dictionary
+    
 
     # link parent-child relationships
+    root_node = None
     for node in nodes.values():
-        if node._parent == -1:
+        if node._parent_index == -1:
             # root node
-            if root_node is None:  # check that we've had no other root node
-                root_node = node
-            else:
+            if root_node is not None: 
+                # looks like we've had a root node already
                 raise ValueError("swc file must contain only one root")
-        else:  # normal node
-            parent_node = nodes[node._parent]
-            parent_node._children.append(node)
+                
+            root_node = node
+            continue  # root node needs no parent node
+
+        if node._parent_index not in nodes: 
+            raise ValueError(f"Parent index {node._parent_index} not found (error in swc).")
+        
+        parent_node = nodes[node._parent_index]
+        node._parent = parent_node #  assign a parent node to current node using _parent_index
+        parent_node._children.append(node)  # append current node as item in parent node's children list
 
     if root_node is None:  # check we have a root node by the end
-        raise ValueError("swc file must contain only one root")
+        raise ValueError("No root found. swc file must contain a root.")
+    
+    if root_node._parent is not None:  # check root node has no parent by the end 
+        raise ValueError("Root node should not have a parent")
 
     return root_node, nodes
 
@@ -74,8 +85,10 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
 def main():
     df = swc_to_dataframe("morphology/main.swc")
     root_node, nodes = dataframe_to_tree(df)
-    print(root_node)
-    print(nodes)
+    print(root_node.distance(nodes[12]))
+    print(nodes[12].length_to_root())
+
+
 
 
 if __name__ == "__main__":
