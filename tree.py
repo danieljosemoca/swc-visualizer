@@ -3,15 +3,15 @@ import math
 
 class Node:
     __slots__ = (
-        '_index',
-        '_type',
-        '_x',
-        '_y',
-        '_z',
-        '_radius',
-        '_parent_index',  # int (from SWC)
-        '_parent',        # Node | None
-        '_children'
+        "_index",
+        "_type",
+        "_x",
+        "_y",
+        "_z",
+        "_radius",
+        "_parent_index",  # int (from SWC)
+        "_parent",  # Node | None
+        "_children",
     )
 
     def __init__(
@@ -23,7 +23,7 @@ class Node:
         z: float,
         radius: float,
         parent_index: int,
-     ) -> None:
+    ) -> None:
         self._index = index
         self._type = node_type
         self._x = x

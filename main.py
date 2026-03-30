@@ -52,31 +52,36 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
             # parent Node assigned later
         )
         nodes[node._index] = node  # add new node to dictionary
-    
 
     # link parent-child relationships
     root_node = None
     for node in nodes.values():
         if node._parent_index == -1:
             # root node
-            if root_node is not None: 
+            if root_node is not None:
                 # looks like we've had a root node already
                 raise ValueError("swc file must contain only one root")
-                
+
             root_node = node
             continue  # root node needs no parent node
 
-        if node._parent_index not in nodes: 
-            raise ValueError(f"Parent index {node._parent_index} not found (error in swc).")
-        
+        if node._parent_index not in nodes:
+            raise ValueError(
+                f"Parent index {node._parent_index} not found (error in swc)."
+            )
+
         parent_node = nodes[node._parent_index]
-        node._parent = parent_node #  assign a parent node to current node using _parent_index
-        parent_node._children.append(node)  # append current node as item in parent node's children list
+        node._parent = (
+            parent_node  #  assign a parent node to current node using _parent_index
+        )
+        parent_node._children.append(
+            node
+        )  # append current node as item in parent node's children list
 
     if root_node is None:  # check we have a root node by the end
         raise ValueError("No root found. swc file must contain a root.")
-    
-    if root_node._parent is not None:  # check root node has no parent by the end 
+
+    if root_node._parent is not None:  # check root node has no parent by the end
         raise ValueError("Root node should not have a parent")
 
     return root_node, nodes
@@ -87,8 +92,6 @@ def main():
     root_node, nodes = dataframe_to_tree(df)
     print(root_node.distance(nodes[12]))
     print(nodes[12].length_to_root())
-
-
 
 
 if __name__ == "__main__":
