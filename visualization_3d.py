@@ -73,7 +73,7 @@ def plot_3d(
                 showscale=True,
                 colorbar=dict(  # gradient legend
                     title=dict(
-                        text=(f"scaled {color_method.__name__} output"),
+                        text=(f"scaled {color_method.__name__}() value"),
                         font=dict(size=15),
                         side="right",
                     ),

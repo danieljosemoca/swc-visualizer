@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 from tree import Node
 from typing import Callable
 
@@ -19,7 +20,7 @@ def plot_2d(
 
     # needed to scale color method outputs
     max_value = max(color_method(node) for node in nodes.values())
-    cmap = plt.colormaps["plasma"]
+    cmap = plt.colormaps["plasma"]  # choose a pretty colormap
 
     for node in nodes.values():
         if node._parent is None:
@@ -42,4 +43,10 @@ def plot_2d(
     plt.title("Neuron Morphology 2D")
     plt.axis("equal")  # keeps scale of axes equal (not so 2D otherwise)
 
+    # colorbar
+    plt.colorbar(
+        plt.cm.ScalarMappable(cmap=cmap),
+        ax=plt.gca(),
+        label=f"scaled {color_method.__name__}() value",
+    )
     plt.show()
