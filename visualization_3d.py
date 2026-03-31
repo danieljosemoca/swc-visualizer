@@ -5,7 +5,7 @@ from typing import Callable
 
 def plot_3d(
     nodes: dict[int, Node],
-    color_method: Callable[[Node], float] = Node.distance_to_root,
+    color_method: Callable[[Node], float] = Node.distance_from_root,
 ):
 
     # dictionary with output by the color method, for each node

@@ -67,14 +67,14 @@ class Node:
             node = node._parent
         return node
 
-    def distance_to_root(self) -> float:
+    def distance_from_root(self) -> float:
         """
         Returns the distance, in micrometers,
         between the current node and the root node.
         """
         return self.distance(self.get_root())
 
-    def length_to_root(self, limit: int = 15000) -> float:
+    def length_from_root(self, limit: int = 15000) -> float:
         """
         Determines the length of the branch from the current node to the root node, in micrometers.
 
