@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from tree import Node
 
 
-def plot_tree_2d(nodes: dict[int, Node]): 
+def plot_tree_2d(nodes: dict[int, Node]):
     root = next(node for node in nodes.values() if node._parent is None)
 
     # needed to normalize distance from root
@@ -32,12 +32,13 @@ def plot_tree_2d(nodes: dict[int, Node]):
 
     plt.show()
 
+
 def plot_tree_3d(nodes: dict[int, Node]):
     # creating figure
     plt.ion
     fig = plt.figure()
-    ax = fig.add_subplot(projection='3d')
-    
+    ax = fig.add_subplot(projection="3d")
+
     root = next(node for node in nodes.values() if node._parent is None)
 
     # needed to normalize distance from root

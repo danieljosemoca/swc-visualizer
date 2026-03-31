@@ -58,11 +58,29 @@ class Node:
             + (other._z - self._z) ** 2
         )
 
+    def get_root(self) -> "Node":
+        """Returns the root node in the tree."""
+        node = self
+        while node._parent is not None:
+            # this while loop finds the root node
+            # which has no parent
+            node = node._parent
+        return node
+
+    def distance_to_root(self) -> float:
+        """
+        Returns the distance, in micrometers,
+        between the current node and the root node.
+        """
+        return self.distance(self.get_root())
+
     def length_to_root(self, limit: int = 15000) -> float:
-        """determines the length of the branch from the current node to the root node, in micrometers.
+        """
+        Determines the length of the branch from the current node to the root node, in micrometers.
 
         Input:
-        limit: max number of node traversals while attempting to find the root node until an Error is raised"""
+        limit: max number of node traversals while attempting to find the root node until an Error is raised
+        """
         node = self
         count = 0
         distance_accumulator = 0
