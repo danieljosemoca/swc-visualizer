@@ -5,7 +5,10 @@ from matplotlib.colors import to_hex
 from typing import Callable
 
 
-def plot_3d(nodes: dict[int, Node], color_method: Callable[[Node], float] = Node.distance_to_root):
+def plot_3d(
+    nodes: dict[int, Node],
+    color_method: Callable[[Node], float] = Node.distance_to_root,
+):
     fig = go.Figure()
     root = next(node for node in nodes.values() if node._parent is None)
 
@@ -23,9 +26,9 @@ def plot_3d(nodes: dict[int, Node], color_method: Callable[[Node], float] = Node
         z_vals = [node._z, node._parent._z]
 
         # computed color normalized to [0, 1]
-        try: 
+        try:
             norm_value = values[node] / max_value
-        except ZeroDivisionError: 
+        except ZeroDivisionError:
             norm_value = values[node] / 1
 
         # now RGB color via colormap
