@@ -49,11 +49,10 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 
 == TO DO == 
 -mandatory-
-- root node list instead of one root node per swc? 
-- make self._parent Node object
 - validation tools 
 - research math.dist((x, y, z), (x, y, z)), instead of math.sqrt(3d distance formula)
-- 2D visualizaton tools
+- 3d visualization 
+- remove repeated code n visualization.py
 
 -ideally-
 - basic info tools (with graphs too)
