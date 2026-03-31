@@ -6,10 +6,10 @@ from typing import Callable
 def plot_2d(
     nodes: dict[int, Node],
     color_method: Callable[[Node], float] = Node.distance_from_root,
-):
+) -> None:
     """
     Plots the tree in 2D.
-    
+
     Inputs:
     nodes: dict[int, Node]
         Mapping from node index to Node object outputted by dataframe_to_tree().
@@ -19,7 +19,7 @@ def plot_2d(
 
     # needed to scale color method outputs
     max_value = max(color_method(node) for node in nodes.values())
-    cmap = plt.colormaps["cividis"]
+    cmap = plt.colormaps["plasma"]
 
     for node in nodes.values():
         if node._parent is None:

@@ -89,8 +89,8 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
 
 def main():
     df = swc_to_dataframe("morphology/main.swc")
-    root_node, nodes = dataframe_to_tree(df)
-    plot_tree_2d(nodes)
+    _, nodes = dataframe_to_tree(df)
+    plot_2d(nodes)
     plot_3d(nodes)
 
 

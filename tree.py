@@ -52,11 +52,7 @@ class Node:
             raise TypeError("'other' must be Node.")
 
         # 3D distance formula
-        return math.sqrt(
-            (other._x - self._x) ** 2
-            + (other._y - self._y) ** 2
-            + (other._z - self._z) ** 2
-        )
+        return math.dist((self._x, self._y, self._z), (other._x, other._y, other._z))
 
     def get_root(self) -> "Node":
         """Returns the root node in the tree."""
@@ -69,8 +65,7 @@ class Node:
 
     def distance_from_root(self) -> float:
         """
-        Returns the distance, in micrometers,
-        between the current node and the root node.
+        Returns the distance, in micrometers, between the current node and the root node.
         """
         return self.distance(self.get_root())
 

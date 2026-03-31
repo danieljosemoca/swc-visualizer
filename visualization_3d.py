@@ -6,7 +6,7 @@ from typing import Callable
 def plot_3d(
     nodes: dict[int, Node],
     color_method: Callable[[Node], float] = Node.distance_from_root,
-):
+) -> None:
     """
     Plots the tree in 3D.
 
@@ -49,7 +49,7 @@ def plot_3d(
             edge_colors.append(1)
             edge_colors.append(1)
 
-        # at end of loop we append None to all lists 
+        # at end of loop we append None to all lists
         # to clearly separate each segment
         edge_x.append(None)
         edge_y.append(None)
