@@ -7,7 +7,7 @@ def plot_tree_2d(nodes: dict[int, Node]):
 
     # needed to normalize distance from root
     max_dist = max(node.distance(root) for node in nodes.values())
-    cmap = plt.colormaps["copper"]
+    cmap = plt.colormaps["cividis"]
 
     for node in nodes.values():
         if node._parent is None:
@@ -42,7 +42,7 @@ def plot_tree_3d(nodes: dict[int, Node]):
 
     # needed to normalize distance from root
     max_dist = max(node.distance(root) for node in nodes.values())
-    cmap = plt.colormaps["copper"]
+    cmap = plt.colormaps["cividis"]
 
     for node in nodes.values():
         if node._parent is None:

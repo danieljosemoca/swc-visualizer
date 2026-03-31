@@ -51,23 +51,18 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 -mandatory-
 - validation tools 
 - research math.dist((x, y, z), (x, y, z)), instead of math.sqrt(3d distance formula)
-- 3d visualization 
-- remove repeated code n visualization.py
+- remove repeated code in visualization.py
+
 
 -ideally-
 - basic info tools (with graphs too)
-
--extra ideas-
-- supervised learning for a specific disease (categorize neurons as healthy or from x condition)
-- supervised learning disease in general (categorize neurons as healthy or abnormal)
-- unsupervised learning to assist with general data exploration (PCA, k-means)
+- improve visualization efficiency
 
 
 
 
 
-3D visualizer: 
-- pymol 
+
+3D visualizers (unlikely to be used atp): 
 - nglview 
-- opengl
-- plot3d try first
+- opengl (via vispy)
