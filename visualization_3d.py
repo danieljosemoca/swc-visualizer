@@ -2,15 +2,16 @@ import plotly.graph_objects as go
 from tree import Node
 from matplotlib import cm
 from matplotlib.colors import to_hex
+from typing import Callable
 
 
-def plot_3d(nodes: dict[int, Node]):
+def plot_3d(nodes: dict[int, Node], color_method: Callable[[Node], float] = Node.distance_to_root):
     fig = go.Figure()
     root = next(node for node in nodes.values() if node._parent is None)
 
-    # dictionary with distance in micrometers from the root node, for each node
-    distances = {node: node.distance(root) for node in nodes.values()}
-    max_dist = max(distances.values())  # needed to normalize distance from root
+    # dictionary with values used for coloring
+    values = {node: color_method(node) for node in nodes.values()}
+    max_value = max(values.values()) or 1  # needed to normalize color range later
 
     for node in nodes.values():
         if node._parent is None:
@@ -21,11 +22,11 @@ def plot_3d(nodes: dict[int, Node]):
         y_vals = [node._y, node._parent._y]
         z_vals = [node._z, node._parent._z]
 
-        # normalized distance from the root
-        norm_dist = distances[node] / max_dist
+        # computed color normalized to [0, 1]
+        norm_value = values[node] / max_value
 
-        # color based on that distance
-        rgba = cm.get_cmap("cividis")(norm_dist)
+        # now RGB color via colormap
+        rgba = cm.get_cmap("cividis")(norm_value)
         color = to_hex(rgba)
 
         # plot time
