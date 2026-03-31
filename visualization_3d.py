@@ -8,7 +8,7 @@ def plot_3d(
     color_method: Callable[[Node], float] = Node.distance_to_root,
 ):
 
-    # dictionary with values used for coloring
+    # dictionary with output by the color method, for each node
     values = {node: color_method(node) for node in nodes.values()}
     max_value = max(values.values())  # needed to normalize color range later
 
@@ -32,6 +32,7 @@ def plot_3d(
         edge_z.append(node._parent._z)
 
         # computed color normalized to [0, 1]
+        # added once for each node (so twice per segment)
         try:
             edge_colors.append(values[node] / max_value)
             edge_colors.append(values[node] / max_value)
@@ -39,14 +40,15 @@ def plot_3d(
             edge_colors.append(1)
             edge_colors.append(1)
 
-        # at end of loop we append None to separate each segment
+        # at end of loop we append None to all lists 
+        # to clearly separate each segment
         edge_x.append(None)
         edge_y.append(None)
         edge_z.append(None)
-        # colors does not accept None so we use 0 as placeholder
+        # colors parameter does rejects None so we use 0 here
         edge_colors.append(0)
 
-    # plot time
+    # plot all the segments as a polyline
     fig = go.Figure()
 
     fig.add_trace(
@@ -60,7 +62,7 @@ def plot_3d(
                 colorscale="agsunset",
                 width=3,
                 showscale=True,
-                colorbar=dict(
+                colorbar=dict(  # gradient legend
                     title=dict(
                         text=(f"scaled {color_method.__name__} output"),
                         font=dict(size=15),
