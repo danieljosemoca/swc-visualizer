@@ -56,7 +56,6 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 
 -ideally-
 - basic info tools (with graphs too)
-- improve visualization efficiency
 
 
 
