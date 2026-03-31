@@ -7,6 +7,15 @@ def plot_3d(
     nodes: dict[int, Node],
     color_method: Callable[[Node], float] = Node.distance_from_root,
 ):
+    """
+    Plots the tree in 3D.
+
+    Inputs:
+    nodes: dict[int, Node]
+        Mapping from node index to Node object outputted by dataframe_to_tree().
+    color_method: Callable[[Node], float]
+        Method to determine color of each segment. Should take a Node as input and output a float.
+    """
 
     # dictionary with output by the color method, for each node
     values = {node: color_method(node) for node in nodes.values()}

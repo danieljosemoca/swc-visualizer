@@ -1,7 +1,7 @@
 import pandas as pd
 
 from tree import Node
-from visualization import plot_tree_2d, plot_tree_3d
+from visualization import plot_2d
 from visualization_3d import plot_3d
 
 
@@ -90,6 +90,7 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
 def main():
     df = swc_to_dataframe("morphology/main.swc")
     root_node, nodes = dataframe_to_tree(df)
+    plot_tree_2d(nodes)
     plot_3d(nodes)
 
 
