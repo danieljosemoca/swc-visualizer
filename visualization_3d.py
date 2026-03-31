@@ -40,22 +40,14 @@ def plot_3d(
         edge_y.append(node._parent._y)
         edge_z.append(node._parent._z)
 
-        # computed color normalized to [0, 1]
-        # added once for each node (so twice per segment)
+        # compute segment color, scaled to [0, 1]
+        # added once per node (so twice per segment)
         try:
             edge_colors.append(values[node] / max_value)
             edge_colors.append(values[node] / max_value)
         except ZeroDivisionError:
             edge_colors.append(1)
             edge_colors.append(1)
-
-        # at end of loop we append None to all lists
-        # to clearly separate each segment
-        edge_x.append(None)
-        edge_y.append(None)
-        edge_z.append(None)
-        # colors parameter does rejects None so we use 0 here
-        edge_colors.append(0)
 
     # plot all the segments as a polyline
     fig = go.Figure()
