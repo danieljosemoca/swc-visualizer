@@ -11,7 +11,7 @@ def plot_3d(nodes: dict[int, Node], color_method: Callable[[Node], float] = Node
 
     # dictionary with values used for coloring
     values = {node: color_method(node) for node in nodes.values()}
-    max_value = max(values.values()) or 1  # needed to normalize color range later
+    max_value = max(values.values())  # needed to normalize color range later
 
     for node in nodes.values():
         if node._parent is None:
@@ -23,7 +23,10 @@ def plot_3d(nodes: dict[int, Node], color_method: Callable[[Node], float] = Node
         z_vals = [node._z, node._parent._z]
 
         # computed color normalized to [0, 1]
-        norm_value = values[node] / max_value
+        try: 
+            norm_value = values[node] / max_value
+        except ZeroDivisionError: 
+            norm_value = values[node] / 1
 
         # now RGB color via colormap
         rgba = cm.get_cmap("cividis")(norm_value)
