@@ -63,7 +63,7 @@ def plot_3d(
                 colorscale="agsunset",
                 width=3,
                 showscale=True,
-                colorbar=dict(  # gradient legend
+                colorbar=dict(  # color scale in the legend
                     title=dict(
                         text=(f"scaled {color_method.__name__}() value"),
                         font=dict(size=15),

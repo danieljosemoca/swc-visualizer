@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
 from tree import Node
 from typing import Callable
 
@@ -38,8 +37,8 @@ def plot_2d(
         # color using colormap value
         plt.plot(x_vals, y_vals, color=color)
 
-    plt.xlabel("X position")
-    plt.ylabel("Y position")
+    plt.xlabel("Relative X Position")
+    plt.ylabel("Relative Y Position")
     plt.title("Neuron Morphology 2D")
     plt.axis("equal")  # keeps scale of axes equal (not so 2D otherwise)
 

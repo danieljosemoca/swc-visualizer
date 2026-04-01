@@ -50,18 +50,8 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 == TO DO == 
 -mandatory-
 - validation tools 
-- research math.dist((x, y, z), (x, y, z)), instead of math.sqrt(3d distance formula)
-- remove repeated code in visualization.py
-
+- remove repeated code in the two visualizations
 
 -ideally-
-- basic info tools (with graphs too)
-
-
-
-
-
-
-3D visualizers (unlikely to be used atp): 
-- nglview 
-- opengl (via vispy)
+- basic info tools (with graphs too? def input)
+- hovering for more info about node (node type)
