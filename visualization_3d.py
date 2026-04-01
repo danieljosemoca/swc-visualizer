@@ -18,8 +18,13 @@ def plot_3d(
     """
 
     # dictionary with output by the color method, for each node
-    values = {node: color_method(node) for node in nodes.values()}
-    max_value = max(values.values())  # needed to normalize color range later
+    col_values = {node: color_method(node) for node in nodes.values()}
+    
+    max_col_value = max(col_values.values())  # to normalize color range later
+
+    if max_col_value == 0: 
+        max_col_value = 1.0  # avoid zerodivisionerror when scaling
+    
 
     # will store the two endpoints of each segment here,
     # in separate lists per dimension
@@ -29,16 +34,22 @@ def plot_3d(
     for node in nodes.values():
         if node._parent is None:
             continue  # skip root node
+        
+        # compute this segment's color, scaled to [0, 1]
+        norm_col_val = col_values[node] / max_col_value
 
-        # endpoint 1 of this segment
+        # =endpoint 1 of this segment=
         edge_x.append(node._x)
         edge_y.append(node._y)
         edge_z.append(node._z)
+        edge_colors.append(norm_col_val)
 
-        # endpoint 2 of this segment
+
+        # =endpoint 2 of this segment=
         edge_x.append(node._parent._x)
         edge_y.append(node._parent._y)
         edge_z.append(node._parent._z)
+        edge_colors.append(norm_col_val)  # appended again so edge has uniform color
 
         # Separators so plotly knows we'll draw a separate edge next loop
         edge_x.append(None)
@@ -46,14 +57,6 @@ def plot_3d(
         edge_z.append(None)
         edge_colors.append(0)
 
-        # compute segment color, scaled to [0, 1]
-        # added once per node (so twice per segment)
-        try:
-            edge_colors.append(values[node] / max_value)
-            edge_colors.append(values[node] / max_value)
-        except ZeroDivisionError:
-            edge_colors.append(1)
-            edge_colors.append(1)
 
     # plot all the segments as a polyline
     fig = go.Figure()
