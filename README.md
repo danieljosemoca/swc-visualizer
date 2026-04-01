@@ -49,8 +49,10 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 
 == TO DO == 
 -mandatory-
-- validation tools 
+- validation tools (mutant catcher? omaiga)
 - remove repeated code in the two visualizations
+- fix turtle walk (transparent during pen-up?)
+- turn this into a package 
 
 -ideally-
 - basic info tools (with graphs too? def input)

@@ -5,7 +5,7 @@ from typing import Callable
 
 def plot_3d(
     nodes: dict[int, Node],
-    color_method: Callable[[Node], float] = Node.distance_from_root,
+    color_method: Callable[[Node], float] = Node.length_from_root,
 ) -> None:
     """
     Plots the tree in 3D.
@@ -39,6 +39,12 @@ def plot_3d(
         edge_x.append(node._parent._x)
         edge_y.append(node._parent._y)
         edge_z.append(node._parent._z)
+
+        # Separators so plotly knows we'll draw a separate edge next loop
+        edge_x.append(None)
+        edge_y.append(None)
+        edge_z.append(None)
+        edge_colors.append(0)
 
         # compute segment color, scaled to [0, 1]
         # added once per node (so twice per segment)
