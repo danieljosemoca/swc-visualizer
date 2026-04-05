@@ -50,7 +50,6 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 == TO DO == 
 -mandatory-
 - remove repeated code in the two visualizations
-- make user experience slightly easier (like picking ur neuron to view)
 - restructure whole thing 
 - add swc file name to visualization (uh oh bit hard maybe)
 
