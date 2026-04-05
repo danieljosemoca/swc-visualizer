@@ -1,4 +1,5 @@
 import pandas as pd
+
 from tree import Node
 
 
@@ -31,7 +32,11 @@ def swc_to_dataframe(filepath, column_names=None):
     return df
 
 
-def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
+# assign complex data type outputted by dataframe_to_tree() to a variable
+RootAndMappingTuple = tuple[Node, dict[int, Node]]
+
+
+def dataframe_to_tree(df: pd.DataFrame) -> RootAndMappingTuple:
     """
     Convert an SWC DataFrame into a tree of Node objects.
 

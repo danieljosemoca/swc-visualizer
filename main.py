@@ -10,7 +10,7 @@ def main() -> None:
     # locate all swc files in the 'morphology' folder
     swc_files = glob.glob("morphology/*.swc")
     if not swc_files:
-        print("No .swc files found in the 'morphology' folder.")
+        print("No .swc files found in a 'morphology' folder.")
         return
 
     # ask user which visualization(s) they want
@@ -19,14 +19,14 @@ def main() -> None:
     print("2: 3D only")
     print("3: Both 2D and 3D")
     choice = input("Enter 1, 2, or 3: ").strip()
-    do_2d = choice == "1" or choice == "3"
-    do_3d = choice == "2" or choice == "3"
+    do_2d = choice == "1" or choice == "3"  # do_2d is True is 2D selected for
+    do_3d = choice == "2" or choice == "3"  # do_3d is True is 3D selected for
 
     # process each file
     for filepath in swc_files:
         print(f"\n--- Processing: {os.path.basename(filepath)} ---")
         try:
-            df = swc_to_dataframe(filepath)
+            df = swc_to_dataframe(filepath)  # dataframe
             root_node, nodes = dataframe_to_tree(df)  # tree construction
             root_node.neuron_summary()  # validation + basic stats
 
@@ -34,7 +34,9 @@ def main() -> None:
                 plot_2d(nodes)
             if do_3d:
                 plot_3d(nodes)
-        except Exception as e:  # catch and report any error that happens during file processing
+        except Exception as e:
+            # catch and report any error processing a specific file,
+            # and proceed with processing other files
             print(f"Error processing {filepath}: {e}")
 
 

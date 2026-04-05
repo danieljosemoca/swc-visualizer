@@ -1,7 +1,15 @@
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
+
 from tree import Node
 from typing import Callable
+
+
+def _normalize(values: list[float]) -> list[float]:
+    max_val = max(values) if values else 1.0
+    if max_val == 0:
+        max_val = 1.0
+    return [v / max_val for v in values]
 
 
 def plot_2d(
@@ -18,10 +26,13 @@ def plot_2d(
         Method to determine the color of each segment. Should take a Node as input and output a float.
     """
 
-    # needed to scale color method outputs
-    max_value = max(color_method(node) for node in nodes.values())
+    # store then normalize values outputted by the color method for each node
+    col_values = [color_method(node) for node in nodes.values() if node._parent is not None]
+    norm_col_values = _normalize(col_values)
+
     cmap = plt.colormaps["plasma"]  # choose a pretty colormap
 
+    i = 0  # to keep track of correspondent color for current node
     for node in nodes.values():
         if node._parent is None:
             continue  # skip root node
@@ -29,10 +40,11 @@ def plot_2d(
         x_vals = [node._x, node._parent._x]
         y_vals = [node._y, node._parent._y]
 
-        distance_from_root = color_method(node)
+        norm_col_val = norm_col_values[i]
+        i += 1
 
-        # pick color in colormap using scaled color method output
-        color = cmap(distance_from_root / max_value)
+        # pick color in colormap using normalized color method output
+        color = cmap(norm_col_val)
 
         # plot a 2D line from current node to its parent node
         # color using colormap value
@@ -67,22 +79,24 @@ def plot_3d(
     """
 
     # dictionary with output by the color method, for each node
-    col_values = {node: color_method(node) for node in nodes.values()}
-    max_col_value = max(col_values.values())  # to normalize color range later
+    col_values = [color_method(node) for node in nodes.values() if node._parent is not None]
 
-    if max_col_value == 0:
-        max_col_value = 1.0  # avoid zerodivisionerror when scaling
+    # normalize values
+    norm_col_values = _normalize(col_values)
 
     # will store the two endpoints of each segment here,
     # in separate lists per dimension
     edge_x, edge_y, edge_z = [], [], []
     edge_colors = []
+
+    i = 0  # to keep track of correspondent color for current node
     for node in nodes.values():
         if node._parent is None:
             continue  # skip root node
 
         # compute this segment's color, scaled to [0, 1]
-        norm_col_val = col_values[node] / max_col_value
+        norm_col_val = norm_col_values[i]
+        i += 1
 
         # =endpoint 1 of this segment=
         edge_x.append(node._x)
@@ -100,7 +114,7 @@ def plot_3d(
         edge_x.append(None)
         edge_y.append(None)
         edge_z.append(None)
-        edge_colors.append(0)
+        edge_colors.append(0)  # color parameter rejects None. 0 goes unread and works the same way
 
     # plot all the segments as a polyline
     fig = go.Figure()
