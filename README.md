@@ -49,11 +49,12 @@ migraine = decreased neurite growth in headeache-processing regions (decreased n
 
 == TO DO == 
 -mandatory-
-- validation tools (mutant catcher? omaiga)
 - remove repeated code in the two visualizations
-- turn this into a package 
-- change length of node to node depth 
-- change depth() to height() question mark
+- make user experience slightly easier (like picking ur neuron to view)
+- restructure whole thing 
+- add swc file name to visualization (uh oh bit hard maybe)
+
+
 
 
 -ideally-

@@ -3,7 +3,7 @@ import math
 
 class Node:
     """"""
-    __slots__ = (
+    __slots__ = (  # __slots__ reduces memory overhead
         "_index",
         "_type",
         "_x",
@@ -40,7 +40,7 @@ class Node:
         Outputs the distance, in micrometers, between the current node and another.
 
         Input:
-        Other: Node object to find distance from node method is used on
+        Other: Node object to find the current node's distance from.
         """
 
         if isinstance(other, int):
@@ -92,40 +92,85 @@ class Node:
 
         return distance_accumulator
 
-    def validate(self):
-        """
-        Checks graph structure is a tree, ie acyclical and connected, using the rule:
-        node number = edge number - 1.
-        """
-        node_count = 0 
+    def validate(self) -> None:
+        """Checks tree is valid, ie. acyclical and complete."""
+        # Find the root of the tree containing this node
+        root = self.get_root()
+
+        visited = set()
+        node_count = 0
         edge_count = 0
+        stack = [root]  # a stack can be  implemented as a python list
 
+        while stack:  # condition false once whole tree traversed
+            node = stack.pop()  # node checked this iteration
+            if node in visited:
+                msg = f"Cycle detected: node {node._index} visited twice."
+                raise RuntimeError(msg)
+            visited.add(node)
+            node_count += 1
 
-    def degree(self): 
-        """outputs the number of trees attached to this node (ie the number of subtrees attached to it)."""
+            for child in node._children:
+                edge_count += 1
+                stack.append(child)  # an iteration of this while loop per tree node
+
+        # Tree structure rule: edges = nodes - 1
+        if edge_count != node_count - 1:
+            msg = f"Invalid tree: edges={edge_count}, nodes={node_count}. "
+            raise RuntimeError(msg)
         
+        # if no errors raised, tree is valid
+        print("Tree is valid!")
 
-    def depth(self):
-        """max(length_from_root())"""
 
-    def dendritic_length(self):
+    def depth(self) -> float:
+        """Returns the maximum length from the root to any node in the tree."""
+        root = self.get_root()
+        max_depth = 0.0
+        # stack holds (node, accumulated_length_from_root)
+        stack = [(root, 0.0)]
+        while stack:
+            node, accum = stack.pop()
+            # Update max depth for this node
+            if accum > max_depth:
+                max_depth = accum
+            for child in node._children:
+                # Add edge length to accumulated length
+                edge_len = node.distance(child)
+                stack.append((child, accum + edge_len))
+        return max_depth
+
+    def total_length(self) -> float:
         """
-        Sum of lengths of all dendritic segments
+        Returns the sum of lengths of all edges in the neuron.
+        """
+        total = 0.0
+        stack = [self.get_root()]
+        while stack:
+            node = stack.pop()
+            for child in node._children:
+                total += node.distance(child)
+                stack.append(child)
+        return total
+
+    def branching_points(self) -> int:
+        """
+        Computes the total number of branching points from the current node 
+        to all children nodes, ie number of nodes with 2+ children.
+        """
+        count = 0
+        stack = [self]
+        while stack:
+            node = stack.pop()
+            if len(node._children) >= 2:
+                count += 1
+            stack.extend(node._children)
+        return count
+    
+    def neuron_summary(self) -> None: 
+        print("Tree validation check:")
+        self.validate()
+        print(f"Number of branching points: {self.branching_points()}")
+        print(f"Total length: {round(self.total_length(), 3)} micrometers")
+        print(f"Tree depth: {round(self.depth(), 3)} micrometers")
         
-        Depression and neurodegeneration have this low
-        """
-
-    def branching_points(self, from_root: bool = False):
-        "computes the total number of branching points from the current node to all children nodes (bruv describe this better)"
-        pass
-
-    def dendritic_complexity(self):
-        "at whole neuron level. Based on length, branch points, and spine density."
-        pass
-
-    def branching_complexity(self):
-        pass
-
-    def tortuosity(self):
-        """path_length / straight_line_distance"""
-        pass

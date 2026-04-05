@@ -27,7 +27,6 @@ def plot_3d(
 
     # will store the two endpoints of each segment here,
     # in separate lists per dimension
-    # and "None" separating each segment
     edge_x, edge_y, edge_z = [], [], []
     edge_colors = []
     for node in nodes.values():
@@ -43,14 +42,13 @@ def plot_3d(
         edge_z.append(node._z)
         edge_colors.append(norm_col_val)
 
-
         # =endpoint 2 of this segment=
         edge_x.append(node._parent._x)
         edge_y.append(node._parent._y)
         edge_z.append(node._parent._z)
         edge_colors.append(norm_col_val)  # appended again so edge has uniform color
 
-        # Separators so plotly knows we'll draw a separate edge next loop
+        # Separators so plotly knows we need a separate edge drawn next loop
         edge_x.append(None)
         edge_y.append(None)
         edge_z.append(None)
