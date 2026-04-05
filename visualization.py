@@ -6,6 +6,7 @@ from typing import Callable
 
 
 def _normalize(values: list[float]) -> list[float]:
+    """Normalizes inputted list of values to the range [0, 1]."""
     max_val = max(values) if values else 1.0
     if max_val == 0:
         max_val = 1.0
@@ -15,6 +16,7 @@ def _normalize(values: list[float]) -> list[float]:
 def plot_2d(
     nodes: dict[int, Node],
     color_method: Callable[[Node], float] = Node.length_from_root,
+    title: str = "Neuron Morphology 2D",
 ) -> None:
     """
     Plots the tree in 2D.
@@ -52,7 +54,7 @@ def plot_2d(
 
     plt.xlabel("Relative X Position")
     plt.ylabel("Relative Y Position")
-    plt.title("Neuron Morphology 2D")
+    plt.title(title)
     plt.axis("equal")  # keeps scale of axes equal (not so 2D otherwise)
 
     # colorbar
@@ -67,6 +69,7 @@ def plot_2d(
 def plot_3d(
     nodes: dict[int, Node],
     color_method: Callable[[Node], float] = Node.length_from_root,
+    title: str = "Neuron Morphology 3D",
 ) -> None:
     """
     Plots the tree in 3D.
@@ -140,4 +143,7 @@ def plot_3d(
             ),
         )
     )
+
+    fig.update_layout(title=dict(text=title, font=dict(size=16)))
+
     fig.show()

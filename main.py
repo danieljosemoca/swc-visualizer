@@ -31,9 +31,9 @@ def main() -> None:
             root_node.neuron_summary()  # validation + basic stats
 
             if do_2d:
-                plot_2d(nodes)
+                plot_2d(nodes,  title=f"Neuron Morphology 2D: {os.path.basename(filepath)}")
             if do_3d:
-                plot_3d(nodes)
+                plot_3d(nodes, title=f"Neuron Morphology 3D: {os.path.basename(filepath)}")
         except Exception as e:
             # catch and report any error processing a specific file,
             # and proceed with processing other files
