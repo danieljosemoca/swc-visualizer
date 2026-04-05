@@ -3,6 +3,7 @@ import math
 
 class Node:
     """"""
+
     __slots__ = (  # __slots__ reduces memory overhead
         "_index",
         "_type",
@@ -118,10 +119,9 @@ class Node:
         if edge_count != node_count - 1:
             msg = f"Invalid tree: edges={edge_count}, nodes={node_count}. "
             raise RuntimeError(msg)
-        
+
         # if no errors raised, tree is valid
         print("Tree is valid!")
-
 
     def depth(self) -> float:
         """Returns the maximum length from the root to any node in the tree."""
@@ -155,7 +155,7 @@ class Node:
 
     def branching_points(self) -> int:
         """
-        Computes the total number of branching points from the current node 
+        Computes the total number of branching points from the current node
         to all children nodes, ie number of nodes with 2+ children.
         """
         count = 0
@@ -166,11 +166,10 @@ class Node:
                 count += 1
             stack.extend(node._children)
         return count
-    
-    def neuron_summary(self) -> None: 
+
+    def neuron_summary(self) -> None:
         print("Tree validation check:")
         self.validate()
         print(f"Number of branching points: {self.branching_points()}")
         print(f"Total length: {round(self.total_length(), 3)} micrometers")
         print(f"Tree depth: {round(self.depth(), 3)} micrometers")
-        
