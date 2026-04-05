@@ -5,7 +5,7 @@ from typing import Callable
 
 def plot_2d(
     nodes: dict[int, Node],
-    color_method: Callable[[Node], float] = Node.distance_from_root,
+    color_method: Callable[[Node], float] = Node.length_from_root,
 ) -> None:
     """
     Plots the tree in 2D.
@@ -14,7 +14,7 @@ def plot_2d(
     nodes: dict[int, Node]
         Mapping from node index to Node object outputted by dataframe_to_tree().
     color_method: Callable[[Node], float]
-        Method to determine color of each segment. Should take a Node as input and output a float.
+        Method to determine the color of each segment. Should take a Node as input and output a float.
     """
 
     # needed to scale color method outputs

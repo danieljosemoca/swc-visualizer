@@ -19,7 +19,6 @@ def plot_3d(
 
     # dictionary with output by the color method, for each node
     col_values = {node: color_method(node) for node in nodes.values()}
-    
     max_col_value = max(col_values.values())  # to normalize color range later
 
     if max_col_value == 0: 

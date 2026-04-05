@@ -2,6 +2,7 @@ import math
 
 
 class Node:
+    """"""
     __slots__ = (
         "_index",
         "_type",
@@ -30,8 +31,8 @@ class Node:
         self._y = y
         self._z = z
         self._radius = radius
-        self._parent_index = parent_index  # always int
-        self._parent: Node | None = None  # set later
+        self._parent_index = parent_index
+        self._parent: Node | None = None  # set later in dataframe_to_tree()
         self._children = []
 
     def distance(self, other: "Node") -> float:
@@ -49,7 +50,7 @@ class Node:
 
         elif not isinstance(other, Node):
             # 'other' was inputted as neither a Node or index for a node
-            raise TypeError("'other' must be Node.")
+            raise TypeError("'other' must be a Node.")
 
         # 3D distance formula
         return math.dist((self._x, self._y, self._z), (other._x, other._y, other._z))
@@ -92,8 +93,27 @@ class Node:
         return distance_accumulator
 
     def validate(self):
-        "checks tree integrity and fixes anything it can..."
-        pass
+        """
+        Checks graph structure is a tree, ie acyclical and connected, using the rule:
+        node number = edge number - 1.
+        """
+        node_count = 0 
+        edge_count = 0
+
+
+    def degree(self): 
+        """outputs the number of trees attached to this node (ie the number of subtrees attached to it)."""
+        
+
+    def depth(self):
+        """max(length_from_root())"""
+
+    def dendritic_length(self):
+        """
+        Sum of lengths of all dendritic segments
+        
+        Depression and neurodegeneration have this low
+        """
 
     def branching_points(self, from_root: bool = False):
         "computes the total number of branching points from the current node to all children nodes (bruv describe this better)"
@@ -107,12 +127,5 @@ class Node:
         pass
 
     def tortuosity(self):
+        """path_length / straight_line_distance"""
         pass
-
-    def degeneration_score(self, other_root_node: "Node"):
-        """compares volume of two swc files."""
-        pass
-
-    def neuro_compare(self, other_root_node: "Node"):
-        """quantify spatial distribution changes between swc files"""
-        # could make a cool graph

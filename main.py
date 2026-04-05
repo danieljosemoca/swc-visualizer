@@ -14,7 +14,7 @@ def swc_to_dataframe(filepath, column_names=None):
     Column names is a possible input in case some swc files we stumble upon aren't standardized.
     """
     if column_names is None:
-        column_names = ["Index", "Type", "X", "Y", "Z", "R", "Parent"]
+        column_names = ["Index", "Type", "X", "Y", "Z", "R", "Parent"]  # as per swc file structure
 
     df = pd.read_csv(
         filepath,
@@ -88,7 +88,7 @@ def dataframe_to_tree(df: pd.DataFrame) -> tuple[Node, dict[int, Node]]:
 
 
 def main():
-    df = swc_to_dataframe("morphology/main.swc")
+    df = swc_to_dataframe("morphology/drosophila_uniglomerular.swc")
     _, nodes = dataframe_to_tree(df)
     plot_2d(nodes)
     plot_3d(nodes)
