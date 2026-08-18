@@ -5,11 +5,27 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "swc-visualizer"
 version = "0.1.0"
-description = "Validation, summaries, and 2D/3D visualization of SWC files"
-readme = "README.md"
-requires-python = ">=3.11"
 dependencies = [
     "matplotlib>=3.10.8",
     "pandas>=2.3.3",
     "plotly>=6.6.0",
 ]
+requires-python = ">=3.11"
+authors = [
+  {name = "Daniel Moreno", email = "xx8203914@gmail.com"},
+]
+description = "Validation, summaries, and 2D/3D visualization of SWC files"
+readme = "README.md"
+license = "MIT"
+keywords = ["morphology", "neuron", "neurons", "neuroscience", "visualizer", "plotly", "swc", "tree"]
+classifiers = [
+     "Development Status :: 2 - Pre-Alpha"
+     "Intended Audience :: Neuroscientists"
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/danieljosemoca/swc-visualizer"
+Repository = "https://github.com/danieljosemoca/swc-visualizer.git"
+Issues = "https://github.com/danieljosemoca/swc-visualizer/issues"
