@@ -18,12 +18,16 @@ authors = [
 description = "Validation, summaries, and 2D/3D visualization of SWC files"
 readme = "README.md"
 license = "MIT"
+license-files = ["LICEN[CS]E*"]
 keywords = ["morphology", "neuron", "neurons", "neuroscience", "visualizer", "plotly", "swc", "tree"]
 classifiers = [
-     "Development Status :: 2 - Pre-Alpha",
-     "Intended Audience :: Neuroscientists",
+    "Programming Language :: Python :: 3",
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
 
 [project.scripts]
