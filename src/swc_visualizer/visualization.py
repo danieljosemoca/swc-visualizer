@@ -28,6 +28,9 @@ def plot_2d(
         Method to determine the color of each segment. Should take a Node as input and output a float.
     """
 
+    # get color method name 
+    color_method_name = getattr(color_method, "__name__", str(color_method))
+
     # store then normalize values outputted by the color method for each node
     col_values = [color_method(node) for node in nodes.values() if node._parent is not None]
     norm_col_values = _normalize(col_values)
@@ -61,7 +64,7 @@ def plot_2d(
     plt.colorbar(
         plt.cm.ScalarMappable(cmap=cmap),
         ax=plt.gca(),
-        label=f"scaled {color_method.__name__}() value",
+        label=f"scaled {color_method_name}() value",
     )
     plt.show()
 
