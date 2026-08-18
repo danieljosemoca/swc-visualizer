@@ -13,6 +13,7 @@ The tool can:
 
 ## Example 
 ![See docs/3d_visualizer_example.png](https://raw.githubusercontent.com/danieljosemoca/swc-visualizer/main/docs/3d_visualizer_example.png)
+![And docs/2d_visualizer_example.png](https://raw.githubusercontent.com/danieljosemoca/swc-visualizer/main/docs/2d_visualizer_example.png)
 
 ## Basic Usage
 After installing the package, import and call ```visualize_swc ```
