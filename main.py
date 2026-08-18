@@ -17,11 +17,13 @@ def visualize_swc(path, visualization = "3d") -> None:
         if not swc_files:
                 msg = "No .swc files found in provided directory."
                 raise FileNotFoundError(msg)
+        print(f"Found {len(swc_files)} SWC files in '{path}' directory.")
+
     else: 
         msg = "No folder exists at the location specified."
         raise FileNotFoundError(msg)
 
-    
+    len_dir = len(swc_files)  # total number of files to process
     # determine visualization
     visualization = visualization.upper()
     if visualization == "2D": 
@@ -36,10 +38,12 @@ def visualize_swc(path, visualization = "3d") -> None:
     else:
         msg = "Expected '2d', '3d', or 'both' for visualization argument"
         raise ValueError(msg)
-        
+
+    print("\n\nStarting Processing...")
     # process each file
-    for filepath in swc_files:
-        print(f"\n--- Processing: {os.path.basename(filepath)} ---")
+    for file_num, filepath in enumerate(swc_files, start=1):
+        if len_dir > 1:
+            print(f"\n--- Processing {file_num}/{len_dir}: {os.path.basename(filepath)} ---")
         try:
             df = swc_to_dataframe(filepath)  # dataframe
             root_node, nodes = dataframe_to_tree(df)  # tree construction
