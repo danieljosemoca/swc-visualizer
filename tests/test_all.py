@@ -7,6 +7,7 @@ from swc_visualizer.processing import swc_to_dataframe, dataframe_to_tree
 
 # ---------- Fixtures ----------
 
+
 @pytest.fixture
 def valid_swc_file(tmp_path):
     filepath = tmp_path / "valid.swc"

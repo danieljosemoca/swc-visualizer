@@ -28,7 +28,7 @@ def plot_2d(
         Method to determine the color of each segment. Should take a Node as input and output a float.
     """
 
-    # get color method name 
+    # get color method name
     color_method_name = getattr(color_method, "__name__", str(color_method))
 
     # store then normalize values outputted by the color method for each node
@@ -84,11 +84,13 @@ def plot_3d(
         Method to determine color of each segment. Should take a Node as input and output a float.
     """
 
-    # get color method name 
+    # get color method name
     color_method_name = getattr(color_method, "__name__", str(color_method))
 
     # dictionary with output by the color method, for each node
-    col_values = [color_method(node) for node in nodes.values() if node._parent is not None]
+    col_values = [
+        color_method(node) for node in nodes.values() if node._parent is not None
+    ]
 
     # normalize values
     norm_col_values = _normalize(col_values)
@@ -123,7 +125,9 @@ def plot_3d(
         edge_x.append(None)
         edge_y.append(None)
         edge_z.append(None)
-        edge_colors.append(0)  # Keep edge colors list aligned with the above coordinate lists.
+        edge_colors.append(
+            0
+        )  # Keep edge colors list aligned with the above coordinate lists.
         # 0 goes unread since corresponding coordinates are None.
 
     # plot all the segments as a polyline

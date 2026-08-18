@@ -50,13 +50,13 @@ def dataframe_to_tree(df: pd.DataFrame) -> RootAndMappingTuple:
     for _, row in df.iterrows():
         # each line corresponds to a single node in swc files
         node = Node(
-        index=int(row["Index"]),
-        node_type=int(row["Type"]),
-        x=float(row["X"]),
-        y=float(row["Y"]),
-        z=float(row["Z"]),
-        radius=float(row["R"]),
-        parent_index=int(row["Parent"]),
+            index=int(row["Index"]),
+            node_type=int(row["Type"]),
+            x=float(row["X"]),
+            y=float(row["Y"]),
+            z=float(row["Z"]),
+            radius=float(row["R"]),
+            parent_index=int(row["Parent"]),
             # parent Node assigned later
         )
         nodes[node._index] = node  # add new node to dictionary
