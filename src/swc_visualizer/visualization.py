@@ -84,6 +84,9 @@ def plot_3d(
         Method to determine color of each segment. Should take a Node as input and output a float.
     """
 
+    # get color method name 
+    color_method_name = getattr(color_method, "__name__", str(color_method))
+
     # dictionary with output by the color method, for each node
     col_values = [color_method(node) for node in nodes.values() if node._parent is not None]
 
@@ -120,8 +123,8 @@ def plot_3d(
         edge_x.append(None)
         edge_y.append(None)
         edge_z.append(None)
-        edge_colors.append(0)  # color parameter rejects None. 
-        # 0 goes unread and works the same way.
+        edge_colors.append(0)  # Keep edge colors list aligned with the above coordinate lists.
+        # 0 goes unread since corresponding coordinates are None.
 
     # plot all the segments as a polyline
     fig = go.Figure()
@@ -139,7 +142,7 @@ def plot_3d(
                 showscale=True,
                 colorbar=dict(  # color scale in the legend
                     title=dict(
-                        text=(f"scaled {color_method.__name__}() value"),
+                        text=f"scaled {color_method_name}() value",
                         font=dict(size=15),
                         side="right",
                     ),
