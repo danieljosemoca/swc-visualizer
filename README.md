@@ -11,8 +11,11 @@ The tool can:
 * Generate interactive 3D visualizations of neuronal morphology.
 * Process SWC files individually or. process all SWC files in a directory sequentially.
 
+## Example 
+![See Screenshot](https://raw.githubusercontent.com/danieljosemoca/swc-visualizer/main/docs/3d_visualizer_example.png)
+
 ## Basic Usage
-After installing the package, import ```visualize_swc ```
+After installing the package, import and call ```visualize_swc ```
 
 ```python
 from swc_visualizer import visualize_swc
