@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-from visualization import plot_2d, plot_3d
-from processing import swc_to_dataframe, dataframe_to_tree
+from .visualization import plot_2d, plot_3d
+from .processing import swc_to_dataframe, dataframe_to_tree
 
 
 def visualize_swc(path, visualization="3d") -> None:

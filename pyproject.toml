@@ -25,6 +25,9 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[project.scripts]
+swc-visualizer = "swc_visualizer.main:main"
+
 [project.urls]
 Homepage = "https://github.com/danieljosemoca/swc-visualizer"
 Repository = "https://github.com/danieljosemoca/swc-visualizer.git"

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
-from tree import Node
+from .tree import Node
 from typing import Callable
 
 
