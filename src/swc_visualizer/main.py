@@ -58,6 +58,8 @@ def visualize_swc(path, visualization = "3d") -> None:
             # and proceed with processing other files
             print(f"Error processing {filepath}: {e}")
 
+def main():
+    visualize_swc("morphology")
 
 if __name__ == "__main__":
-    visualize_swc("src/swc-visualizer/morphology")
+    main()
