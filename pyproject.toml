@@ -19,8 +19,8 @@ readme = "README.md"
 license = "MIT"
 keywords = ["morphology", "neuron", "neurons", "neuroscience", "visualizer", "plotly", "swc", "tree"]
 classifiers = [
-     "Development Status :: 2 - Pre-Alpha"
-     "Intended Audience :: Neuroscientists"
+     "Development Status :: 2 - Pre-Alpha",
+     "Intended Audience :: Neuroscientists",
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]

@@ -117,7 +117,8 @@ def plot_3d(
         edge_x.append(None)
         edge_y.append(None)
         edge_z.append(None)
-        edge_colors.append(0)  # color parameter rejects None. 0 goes unread and works the same way
+        edge_colors.append(0)  # color parameter rejects None. 
+        # 0 goes unread and works the same way.
 
     # plot all the segments as a polyline
     fig = go.Figure()

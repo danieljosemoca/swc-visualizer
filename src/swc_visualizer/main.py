@@ -4,7 +4,8 @@ from pathlib import Path
 from visualization import plot_2d, plot_3d
 from processing import swc_to_dataframe, dataframe_to_tree
 
-def visualize_swc(path, visualization = "3d") -> None:
+
+def visualize_swc(path, visualization="3d") -> None:
     """Main function to run the program."""
     path = Path(path)
     if path.is_file() and path.suffix.lower() == ".swc":
@@ -12,29 +13,29 @@ def visualize_swc(path, visualization = "3d") -> None:
             msg = "provided SWC file path not found."
             raise FileNotFoundError(msg)
         swc_files = [path]
-    elif path.is_dir(): 
+    elif path.is_dir():
         swc_files = list(path.glob("*.swc"))  # locate all swc files in directory
         if not swc_files:
-                msg = "No .swc files found in provided directory."
-                raise FileNotFoundError(msg)
+            msg = "No .swc files found in provided directory."
+            raise FileNotFoundError(msg)
         print(f"Found {len(swc_files)} SWC files in '{path}' directory.")
 
-    else: 
+    else:
         msg = "No folder exists at the location specified."
         raise FileNotFoundError(msg)
 
     len_dir = len(swc_files)  # total number of files to process
     # determine visualization
     visualization = visualization.upper()
-    if visualization == "2D": 
-        do_2d = True 
-        do_3d = False 
+    if visualization == "2D":
+        do_2d = True
+        do_3d = False
     elif visualization == "3D":
-        do_2d = False 
-        do_3d = True 
+        do_2d = False
+        do_3d = True
     elif visualization == "BOTH":
-        do_2d = True 
-        do_3d = True 
+        do_2d = True
+        do_3d = True
     else:
         msg = "Expected '2d', '3d', or 'both' for visualization argument"
         raise ValueError(msg)
@@ -58,8 +59,14 @@ def visualize_swc(path, visualization = "3d") -> None:
             # and proceed with processing other files
             print(f"Error processing {filepath}: {e}")
 
+
 def main():
+    """
+    Entry point into the project.
+    Processes all neurons in the example morphology directory, visualizing in 3D.
+    """
     visualize_swc("morphology")
+
 
 if __name__ == "__main__":
     main()
