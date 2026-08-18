@@ -12,7 +12,7 @@ The tool can:
 * Process SWC files individually or. process all SWC files in a directory sequentially.
 
 ## Example 
-![See Screenshot](https://raw.githubusercontent.com/danieljosemoca/swc-visualizer/main/docs/3d_visualizer_example.png)
+![See docs/3d_visualizer_example.png](https://raw.githubusercontent.com/danieljosemoca/swc-visualizer/main/docs/3d_visualizer_example.png)
 
 ## Basic Usage
 After installing the package, import and call ```visualize_swc ```
