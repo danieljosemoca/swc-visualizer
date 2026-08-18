@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-from src.visualization import plot_2d, plot_3d
-from src.processing import swc_to_dataframe, dataframe_to_tree
+from visualization import plot_2d, plot_3d
+from processing import swc_to_dataframe, dataframe_to_tree
 
 def visualize_swc(path, visualization = "3d") -> None:
     """Main function to run the program."""
@@ -60,4 +60,4 @@ def visualize_swc(path, visualization = "3d") -> None:
 
 
 if __name__ == "__main__":
-    visualize_swc("morphology")
+    visualize_swc("src/swc-visualizer/morphology")

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.tree import Node
+from tree import Node
 
 
 def swc_to_dataframe(filepath, column_names=None):
