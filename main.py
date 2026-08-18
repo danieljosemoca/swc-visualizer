@@ -1,16 +1,26 @@
 import os
-import glob
+from pathlib import Path
 
 from visualization import plot_2d, plot_3d
 from processing import swc_to_dataframe, dataframe_to_tree
 
-def visualize_swc(visualization = "3d") -> None:
+def visualize_swc(path, visualization = "3d") -> None:
     """Main function to run the program."""
-    # locate all swc files in the 'morphology' folder
-    swc_files = glob.glob("morphology/*.swc")
-    if not swc_files:
-        print("No .swc files found in a 'morphology' folder.")
-        return
+    path = Path(path)
+    if path.is_file() and path.suffix.lower() == ".swc":
+        if not path.exists():
+            msg = "provided SWC file path not found."
+            raise FileNotFoundError(msg)
+        swc_files = [path]
+    elif path.is_dir(): 
+        swc_files = list(path.glob("*.swc"))  # locate all swc files in directory
+        if not swc_files:
+                msg = "No .swc files found in provided directory."
+                raise FileNotFoundError(msg)
+    else: 
+        msg = "No folder exists at the location specified."
+        raise FileNotFoundError(msg)
+
     
     # determine visualization
     visualization = visualization.upper()
@@ -46,4 +56,4 @@ def visualize_swc(visualization = "3d") -> None:
 
 
 if __name__ == "__main__":
-    visualize_swc()
+    visualize_swc("morphology")
