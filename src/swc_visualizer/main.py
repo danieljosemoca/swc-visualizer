@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import argparse
 
 from .visualization import plot_2d, plot_3d
 from .processing import swc_to_dataframe, dataframe_to_tree
@@ -9,9 +10,6 @@ def visualize_swc(path, visualization="3d") -> None:
     """Main function to run the program."""
     path = Path(path)
     if path.is_file() and path.suffix.lower() == ".swc":
-        if not path.exists():
-            msg = "provided SWC file path not found."
-            raise FileNotFoundError(msg)
         swc_files = [path]
     elif path.is_dir():
         swc_files = list(path.glob("*.swc"))  # locate all swc files in directory
@@ -61,11 +59,30 @@ def visualize_swc(path, visualization="3d") -> None:
 
 
 def main():
-    """
-    Entry point into the project.
-    Processes all neurons in the example morphology directory, visualizing in 3D.
-    """
-    visualize_swc("morphology")
+    """Entry point into the project."""
+
+    parser = argparse.ArgumentParser(
+        description="Validate and visualize SWC files."
+    )
+
+    parser.add_argument(
+        "path",
+        help="Path to an SWC file or directory containing SWC files."
+    )
+
+    parser.add_argument(
+        "--visualization",
+        choices=["2d", "3d", "both"],
+        default="3d",
+        help="Visualization mode. Default: 3d."
+    )
+
+    args = parser.parse_args()
+
+    visualize_swc(
+        args.path,
+        visualization=args.visualization
+    )
 
 
 if __name__ == "__main__":

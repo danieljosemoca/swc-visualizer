@@ -15,6 +15,13 @@ The tool can:
 ![See docs/3d_visualizer_example.png](https://raw.githubusercontent.com/danieljosemoca/swc-visualizer/main/docs/3d_visualizer_example.png)
 ![And docs/2d_visualizer_example.png](https://raw.githubusercontent.com/danieljosemoca/swc-visualizer/main/docs/2d_visualizer_example.png)
 
+## Installation
+Install SWC Visualizer from PyPI:
+
+```bash
+pip install swc-visualizer
+```
+
 ## Basic Usage
 After installing the package, import and call ```visualize_swc ```
 
@@ -25,7 +32,6 @@ visualize_swc("my/neuron/folder", visualization="3d")
 ```
 
 The visualization argument accepts:
-
 * "2d" — generate a 2D visualization.
 * "3d" — generate a 3D visualization.
 * "both" — generate both 2D and 3D visualizations.
@@ -41,7 +47,19 @@ visualize_swc("my/neuron.swc", visualization="2d")
 # Process all SWC files in a directory
 visualize_swc("my/neuron_folder", visualization="both")
 ```
-Example SWC files from NeuroMorpho are provided in the morphology directory.
+Example SWC files from NeuroMorpho are provided in the ```morphology``` directory.
+
+## Command Line 
+SWC Visualizer can also be used directly from the command line.
+Provide the path to an individual SWC file or a directory containing SWC files, and a visualization type using ```--visualization```. For example:
+```bash
+swc-visualizer my/neuron.swc --visualization 2d
+```
+or
+
+```bash
+swc-visualizer my/neuron_folder --visualization both
+```
 
 ## Acknowledgements
 Special thanks to Marieke Westendorp for her guidance throughout this project.
