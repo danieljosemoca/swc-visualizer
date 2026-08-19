@@ -47,7 +47,6 @@ visualize_swc("my/neuron.swc", visualization="2d")
 # Process all SWC files in a directory
 visualize_swc("my/neuron_folder", visualization="both")
 ```
-Example SWC files from NeuroMorpho are provided in the ```morphology``` directory.
 
 ## Command Line 
 SWC Visualizer can also be used directly from the command line.
@@ -59,6 +58,20 @@ or
 
 ```bash
 swc-visualizer my/neuron_folder --visualization both
+```
+
+## Example SWC Files
+Example SWC files are included with the package and can be accessed using ```"examples"```:
+
+```python
+from swc_visualizer import visualize_swc
+
+visualize_swc("examples", visualization="3d")
+```
+
+From the command line, use the ```--examples``` flag:
+```bash
+swc-visualizer --examples
 ```
 
 ## Acknowledgements
