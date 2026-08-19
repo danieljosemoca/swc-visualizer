@@ -9,6 +9,10 @@ from .processing import swc_to_dataframe, dataframe_to_tree
 def visualize_swc(path, visualization="3d") -> None:
     """Main function to run the program."""
     path = Path(path)
+
+    if path == Path("examples"):  # locate examples folder in package
+            path = Path(__file__).parent / "examples"
+
     if path.is_file() and path.suffix.lower() == ".swc":
         swc_files = [path]
     elif path.is_dir():
@@ -67,22 +71,42 @@ def main():
 
     parser.add_argument(
         "path",
+        nargs="?",  # allow non-path input (i.e --examples)
         help="Path to an SWC file or directory containing SWC files."
     )
 
-    parser.add_argument(
+    parser.add_argument(  # optional flag to specify visualization type
         "--visualization",
         choices=["2d", "3d", "both"],
         default="3d",
         help="Visualization mode. Default: 3d."
     )
 
+    parser.add_argument(
+        "--examples",
+        action="store_true",  # boolean meaning use example folder
+        help="Visualize the example SWC files included with the package."
+    )
+
     args = parser.parse_args()
 
-    visualize_swc(
-        args.path,
-        visualization=args.visualization
-    )
+    if args.examples:  # if user adds --examples
+        examples_path = Path(__file__).parent / "examples"  # find example folder in swc_visualizer dir
+        visualize_swc(
+            examples_path,
+            visualization=args.visualization
+        )
+
+    elif args.path:  # if no --examples...
+        visualize_swc(
+            args.path,  # ...use provided path
+            visualization=args.visualization
+        )
+
+    else:
+        parser.error(
+            "Provide an SWC file or directory, or use --examples."
+        )
 
 
 if __name__ == "__main__":

@@ -10,3 +10,6 @@ report.docx
 
 # Virtual environments
 .venv
+
+# Other
+.DS_store
